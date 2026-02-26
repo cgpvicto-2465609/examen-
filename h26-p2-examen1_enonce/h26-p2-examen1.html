@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen 1 - Programmation Orientée Objet - Cégep de Victoriaville</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --victo-green: #00843D;
+            --victo-dark: #006830;
+            --victo-light: #e8f5e9;
+            --text-color: #1a202c;
+            --text-muted: #4a5568;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--victo-green);
+            background-image: linear-gradient(135deg, var(--victo-green) 0%, var(--victo-dark) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 { margin: 0; font-size: 2.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .header p { margin: 15px 0 0; font-weight: 300; font-size: 1.2rem; opacity: 0.9; }
+
+        .container { max-width: 1000px; margin: -40px auto 60px; padding: 0 20px; }
+
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background-color: var(--victo-green);
+        }
+
+        h2 { color: var(--victo-green); font-size: 1.75rem; margin-top: 0; border-bottom: 2px solid var(--victo-light); padding-bottom: 15px; }
+        h3 { color: var(--victo-dark); font-size: 1.3rem; margin-top: 25px; }
+
+        .points-badge {
+            background: var(--victo-green);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            float: right;
+        }
+
+        .situation {
+            background-color: var(--victo-light);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+            border: 1px solid #c6f6d5;
+        }
+
+        code { font-family: 'Fira Code', monospace; background: #edf2f7; color: #000000; font-weight: 700; padding: 2px 6px; border-radius: 4px; font-size: 0.95em; }
+
+        /* Tables de critères */
+        .rubric { width: 100%; border-collapse: collapse; margin-top: 30px; font-size: 0.8rem; }
+        .rubric th, .rubric td { border: 1px solid var(--border-color); padding: 10px; text-align: left; vertical-align: middle; }
+        .rubric th { background-color: #f8fafc; color: var(--victo-green); font-weight: 700; text-transform: uppercase; }
+        
+        .expert { background-color: #f0fff4; color: #22543d; width: 22%; font-weight: 600; }
+        .maitrise { background-color: #ebf8ff; color: #2a4365; width: 22%; }
+        .developpement { background-color: #fffaf0; color: #744210; width: 22%; }
+        .non-acquis { background-color: #fff5f5; color: #742a2a; width: 22%; }
+        .pts-col { font-weight: 700; text-align: center !important; width: 60px; background-color: #f8fafc; }
+
+        .total-row { background: #f8fafc; font-weight: 800; color: var(--victo-green); font-size: 1.1rem; }
+
+        .footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; }
+
+        .warning-box {
+            background-color: #fff5f5;
+            border: 1px solid #feb2b2;
+            color: #9b2c2c;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            box-shadow: var(--card-shadow);
+        }
+
+        @media print {
+            body { background: white; }
+            .container { margin-top: 20px; }
+            .section-card { box-shadow: none; border: 1px solid #eee; break-inside: avoid; }
+            .header { background: white; color: black; border-bottom: 2px solid black; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Examen 1 • Programmation Objet</h1>
+    <p>Département d'Informatique • Cégep de Victoriaville • Session Hiver 2026</p>
+</div>
+
+<div class="container">
+
+    <!-- PRÉAMBULE GÉNÉRAL -->
+    <div class="warning-box">
+        <h2 style="color: #9b2c2c; border-bottom-color: #feb2b2; font-size: 1.4rem;">Consignes importantes</h2>
+        NOTE : Le cahier noir est permis pour cette épreuve pratique.<br><br>
+        ATTENTION : Un maximum de 7 points sur le total de 70 peut être retiré si la documentation essentielle est manquante (plus de 2 oublis détectés dans l'ensemble de votre code).
+    </div>
+
+    <!-- QUESTION 1: GIT -->
+    <div class="section-card">
+        <span class="points-badge">5 Points</span>
+        <h2>Question 1 : Versionnage & Git</h2>
+        <p>Ce volet évalue votre maîtrise des outils de collaboration et de configuration d'environnement.</p>
+        <ol>
+            <li><strong>Clonage (2.5 pts) :</strong> Cloner le dépôt GitHub Classroom :<br><a href="https://classroom.github.com/a/vh5wctkz" style="color: var(--victo-green); text-decoration: underline;">https://classroom.github.com/a/vh5wctkz</a></li>
+            <li><strong>Règles Git (2.5 pts) :</strong> Configurer les exclusions :
+                <ul>
+                    <li>Ajouter le <code>.gitignore</code> Visual Studio fourni.</li>
+                    <li>Ignorer le dossier <code>Toto</code> (la règle doit fonctionner pour <code>Toto</code> ou <code>toto</code>).</li>
+                    <li>Ignorer tous les fichiers audio <code>.mp3</code>.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <table class="rubric">
+            <thead>
+                <tr>
+                    <th>Critère</th>
+                    <th>Expertise</th>
+                    <th>Maîtrise</th>
+                    <th>Développement</th>
+                    <th>Non-acquis</th>
+                    <th class="pts-col">Pts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Git & Dépôt</strong></td>
+                    <td class="expert">Clonage et règles d'exclusion parfaits selon les consignes.</td>
+                    <td class="maitrise">Clonage réussi, mais règles incomplètes ou erronées.</td>
+                    <td class="developpement">Règle absente ou fichier .gitignore non-conforme.</td>
+                    <td class="non-acquis">Remise .zip sur Teams (0 pour cette section).</td>
+                    <td class="pts-col">/ 5</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- QUESTION 2: SOLUTION -->
+    <div class="section-card">
+        <span class="points-badge">5 Points</span>
+        <h2>Question 2 : Architecture de la Solution</h2>
+        <p>Créez une solution Visual Studio nommée <code>h26-p2-ex1-VotreDA</code> organisée comme suit :</p>
+        <ul>
+            <li><strong>Examen1</strong> (Application Console)</li>
+            <li><strong>Examen1-bibliotheque</strong> (Bibliothèque de classes)</li>
+            <li><strong>Examen1-GUI</strong> (Windows Forms)</li>
+        </ul>
+
+        <table class="rubric">
+            <thead>
+                <tr>
+                    <th>Critère</th>
+                    <th>Expertise</th>
+                    <th>Maîtrise</th>
+                    <th>Développement</th>
+                    <th>Non-acquis</th>
+                    <th class="pts-col">Pts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Solution</strong></td>
+                    <td class="expert">Solution propre, les 3 projets sont bien nommés et typés.</td>
+                    <td class="maitrise">Solution créée mais certains noms ou types sont incorrects.</td>
+                    <td class="developpement">Structure incomplète, un ou plusieurs projets sont manquants.</td>
+                    <td class="non-acquis">Aucune solution ou tout est dans le projet Console.</td>
+                    <td class="pts-col">/ 5</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- QUESTION 3: IMPORTATION -->
+    <div class="section-card">
+        <span class="points-badge">10 Points</span>
+        <h2>Question 3 : Intégration de Code Externe</h2>
+        <p>Importez le projet source fourni sur Teams dans votre solution. Configurez les références de projet nécessaires pour manipuler le tableau suivant dans votre <code>Main()</code> :</p>
+        <code>int[] donnée = { 3, 5, 4, 85, 99, 41, 77, 4, 65, 8, 21, 6, 4, 56, 78, 2 };</code>
+
+        <table class="rubric">
+            <thead>
+                <tr>
+                    <th>Critère</th>
+                    <th>Expertise</th>
+                    <th>Maîtrise</th>
+                    <th>Développement</th>
+                    <th>Non-acquis</th>
+                    <th class="pts-col">Pts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Intégration</strong></td>
+                    <td class="expert">Importation réussie et exécution confirmée depuis le Main().</td>
+                    <td class="maitrise">Importation présente, mais l'exécution est en échec.</td>
+                    <td class="developpement">Code importé mais inaccessible ou non intégré.</td>
+                    <td class="non-acquis">Aucune intégration de code externe effectuée.</td>
+                    <td class="pts-col">/ 10</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="situation">
+        <h2>Mise en situation</h2>
+        <p>Vous venez d'être engagé par <strong>AéroTech Solutions</strong>, une entreprise spécialisée dans l'exploration automatisée par drones. Votre première mission est de concevoir le socle technique de leur nouvelle plateforme de gestion de flotte. Le succès de cette mission dépend de votre rigueur, de votre capacité à organiser votre code et de votre respect des standards de développement de l'entreprise.</p>
+    </div>
+
+    <div class="section-card" style="text-align: center;">
+        <p><strong>C'est le diagramme nécessaire pour faire les 2 prochaines questions.</strong></p>
+        <img src="h26-p2-ex1-uml.png" alt="Diagramme de classes UML" style="max-width: 100%; height: auto; border: 1px solid var(--border-color); border-radius: 8px; margin-top: 15px;">
+    </div>
+
+    <!-- QUESTION 4: DRONE -->
+    <div class="section-card">
+        <span class="points-badge">35 Points</span>
+        <h2>Question 4 : Entité Métier : Classe Drone</h2>
+        <p>Dans votre projet de <strong>bibliothèque de classes</strong>, vous devez implémenter la structure de base représentant un drone. L'entreprise insiste sur la qualité professionnelle du code.</p>
+
+        <p><strong>Nom de la classe :</strong> <code>Drone</code></p>
+
+        <h3>Données à gérer (Exemples de valeurs attendues) :</h3>
+        <ul>
+            <li><strong>Identifiant unique :</strong> Une chaîne de caractères (ex: <code>"DRN-042"</code>).</li>
+            <li><strong>Modèle :</strong> Le nom commercial du drone (ex: <code>"SkyWatcher X5"</code>).</li>
+            <li><strong>Niveau de la batterie :</strong> Valeur numérique décimale représentant le pourcentage (ex: <code>85.5</code>).</li>
+            <li><strong>État du drone :</strong> Énumération obligatoire nommée <code>EtatDrone</code>.</li>
+        </ul>
+
+        <h3>Spécifications de l'énumération <code>EtatDrone</code> :</h3>
+        <p>L'état du drone ne peut être qu'une des valeurs suivantes :</p>
+        <ol>
+            <li>Au repos</li>
+            <li>En mission</li>
+            <li>En maintenance</li>
+            <li>Batterie faible</li>
+        </ol>
+
+        <h3>Fonctionnalité avancée : Méthode <code>Explorer</code></h3>
+        <p>On simule une mission d'exploration :</p>
+        <ul>
+            <li><strong>Signature :</strong> <code>void Explorer(double distanceKm)</code>. Le drone parcourt cette distance et revient.</li>
+            <li><strong>Logique de consommation :</strong> Consomme <strong>2,75%</strong> de batterie par kilomètre parcouru.</li>
+            <li><strong>Validation de sécurité :</strong> Le drone doit être capable d'effectuer le trajet <strong>aller-retour</strong> (distance totale = 2 * distanceKm) avec sa charge actuelle.</li>
+            <li><strong>Action :</strong> Diminuez le niveau de batterie ou levez l'<strong>exception C# appropriée</strong> (ne pas modifier la batterie en cas d'échec).</li>
+        </ul>
+
+        <table class="rubric">
+            <thead>
+                <tr>
+                    <th>Critère Drone</th>
+                    <th>Expertise</th>
+                    <th>Maîtrise</th>
+                    <th>Développement</th>
+                    <th>Non-acquis</th>
+                    <th class="pts-col">Pts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Structure</td><td class="expert">L'ordre des membres suit parfaitement les standards (champs, constructeurs, propriétés, méthodes).</td><td class="maitrise">L'ordre des membres est généralement respecté malgré quelques inversions mineures.</td><td class="developpement">L'organisation de la classe est confuse et ne respecte pas les conventions.</td><td class="non-acquis">Aucune structure logique apparente dans la déclaration des membres.</td><td class="pts-col">/ 4</td></tr>
+                <tr><td>Visibilité</td><td class="expert">Les modificateurs d'accès (public/private) sont appliqués sans aucune erreur.</td><td class="maitrise">La visibilité est globalement bonne, avec une ou deux erreurs mineures.</td><td class="developpement">Les choix de visibilité sont incohérents par rapport aux principes d'encapsulation.</td><td class="non-acquis">Absence totale de contrôle d'accès (tout est laissé public par défaut).</td><td class="pts-col">/ 4</td></tr>
+                <tr><td>Nommage</td><td class="expert">Le nommage des membres est parfait et respecte rigoureusement les conventions C#.</td><td class="maitrise">Le nommage est globalement correct avec jusqu'à 3 oublis ou erreurs mineures.</td><td class="developpement">Le nommage présente plus de 3 oublis ou erreurs par rapport aux conventions.</td><td class="non-acquis">Nommage incohérent ou non-respect total des conventions de nommage.</td><td class="pts-col">/ 4</td></tr>
+                <tr><td>Énumération</td><td class="expert">L'énumération EtatDrone est créée correctement avec toutes les valeurs demandées.</td><td class="maitrise">L'énumération est présente mais il manque une valeur ou le nom est incorrect.</td><td class="developpement">Type énuméré mal défini ou valeurs incohérentes avec l'énoncé.</td><td class="non-acquis">Aucune énumération créée (usage de chaînes de caractères ou d'entiers).</td><td class="pts-col">/ 4</td></tr>
+                <tr><td>Encapsulation</td><td class="expert">Toutes les propriétés utilisent des setters validant rigoureusement les données entrantes.</td><td class="maitrise">L'encapsulation est présente mais certaines validations sont manquantes ou incomplètes.</td><td class="developpement">Manque flagrant de validation dans les propriétés, permettant des états invalides.</td><td class="non-acquis">Usage direct de champs publics au lieu de propriétés encapsulées.</td><td class="pts-col">/ 5</td></tr>
+                <tr><td>Exceptions</td><td class="expert">Les cas d'erreurs sont gérés par des levées d'exceptions C# précises et appropriées.</td><td class="maitrise">Des exceptions sont levées mais elles sont parfois trop génériques (ex: Exception).</td><td class="developpement">La gestion des erreurs est incomplète ou utilise des méthodes non standards.</td><td class="non-acquis">Aucune exception n'est levée pour gérer les situations d'erreur.</td><td class="pts-col">/ 5</td></tr>
+                <tr><td>Emplacement</td><td class="expert">La classe est située dans le projet approprié selon l'architecture demandée.</td><td class="maitrise">La classe est dans un projet fonctionnel mais l'emplacement n'est pas optimal.</td><td class="developpement">Le projet choisi est inadéquat par rapport à la nature de la classe.</td><td class="non-acquis">La classe est mal située (ex: placée dans le projet de test ou console).</td><td class="pts-col">/ 5</td></tr>
+                <tr><td>Logique & État</td><td class="expert">La méthode Explorer() modifie l'état interne de l'objet de manière logique et précise.</td><td class="maitrise">La méthode modifie l'état mais les calculs ou les transitions sont imprécis.</td><td class="developpement">La méthode s'exécute mais ne parvient pas à modifier l'état interne de l'objet.</td><td class="non-acquis">La logique métier est inexistante ou totalement erronée.</td><td class="pts-col">/ 4</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- QUESTION 5: CONTENEUR -->
+    <div class="section-card">
+        <span class="points-badge">15 Points</span>
+        <h2>Question 5 : Logistique : Classe ConteneurDeRangement</h2>
+        <p>Pour sécuriser et organiser le transport des drones.</p>
+
+        <h3>Spécifications techniques :</h3>
+        <ul>
+            <li><strong>Capacité :</strong> Définie au constructeur (entre <strong>10 et 50</strong> drones). Levée d'exception si hors plage.</li>
+            <li><strong>Stockage interne :</strong> <code>List&lt;Drone&gt;</code> ou <code>Drone[]</code>.</li>
+            <li><strong>Confidentialité (STRICT) :</strong> Aucun accesseur (getter) ne doit exposer la structure de stockage interne.</li>
+        </ul>
+
+        <h3>Méthodes à implémenter :</h3>
+        <ol>
+            <li><strong><code>AjouterDrone(Drone nouveauDrone)</code></strong> : Validation de la capacité maximale requise.</li>
+            <li><strong><code>SortirTousLesDrones()</code></strong> : Retourne un <strong>tableau</strong> (<code>Drone[]</code>) et vide le conteneur.</li>
+        </ol>
+
+        <table class="rubric">
+            <thead>
+                <tr>
+                    <th>Critère Conteneur</th>
+                    <th>Expertise</th>
+                    <th>Maîtrise</th>
+                    <th>Développement</th>
+                    <th>Non-acquis</th>
+                    <th class="pts-col">Pts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Structure</td><td class="expert">L'organisation interne respecte scrupuleusement les membres standards.</td><td class="maitrise">L'ordre des membres est généralement correct avec des écarts mineurs.</td><td class="developpement">L'organisation des membres est désordonnée et peu professionnelle.</td><td class="non-acquis">Aucune structure ou organisation logique apparente.</td><td class="pts-col">/ 2</td></tr>
+                <tr><td>Visibilité</td><td class="expert">Utilisation parfaite des modificateurs d'accès pour protéger les membres.</td><td class="maitrise">La visibilité est bonne mais présente quelques erreurs de protection.</td><td class="developpement">La visibilité choisie expose inutilement certains membres internes.</td><td class="non-acquis">Tous les membres sont laissés publics sans discernement.</td><td class="pts-col">/ 2</td></tr>
+                <tr><td>Nommage</td><td class="expert">Le nommage des membres est parfait et respecte les conventions.</td><td class="maitrise">Le nommage est correct avec jusqu'à 3 oublis ou erreurs.</td><td class="developpement">Le nommage présente plus de 3 oublis ou erreurs par rapport aux conventions.</td><td class="non-acquis">Nommage incohérent ou non-respect total des conventions.</td><td class="pts-col">/ 3</td></tr>
+                <tr><td>Encapsulation</td><td class="expert">Confidentialité totale : aucun accesseur (getter) n'expose la structure interne.</td><td class="maitrise">Structure protégée, mais certains attributs sont exposés.</td><td class="developpement">La structure de données interne est partiellement exposée.</td><td class="non-acquis">Échec critique : Un accesseur public expose directement le stockage.</td><td class="pts-col">/ 2</td></tr>
+                <tr><td>Exceptions</td><td class="expert">La validation de la capacité au constructeur est rigoureuse.</td><td class="maitrise">Une validation est présente mais le choix de l'exception est inadéquat.</td><td class="developpement">La validation de capacité est partielle ou lacunaire.</td><td class="non-acquis">Aucune exception n'est levée pour valider la capacité au constructeur.</td><td class="pts-col">/ 2</td></tr>
+                <tr><td>Données retournée</td><td class="expert">La méthode SortirTousLesDrones() retourne un tableau (Drone[]).</td><td class="maitrise">Les données sont retournées mais le type de retour n'est pas optimal.</td><td class="developpement">Le type de retour est erroné par rapport aux spécifications.</td><td class="non-acquis">La méthode ne retourne aucune donnée ou est absente.</td><td class="pts-col">/ 2</td></tr>
+                <tr><td>État & Transition</td><td class="expert">Le conteneur est intégralement vidé après l'opération d'extraction des drones.</td><td class="maitrise">Le conteneur est vidé mais l'information est devenue incohérente en fonction de l'implémentation.</td><td class="developpement">Tentative de vidange effectuée mais incomplète ou erronée.</td><td class="non-acquis">Le conteneur n'est simplement pas vidé après l'opération.</td><td class="pts-col">/ 2</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- RÉSUMÉ TOTAL -->
+    <div class="section-card">
+        <h2 style="border:none">Résumé de la notation</h2>
+        <table style="width:100%; border-collapse: collapse;">
+            <thead>
+                <tr style="text-align: left; background-color: var(--victo-green); color: white;">
+                    <th style="padding:15px; border-radius: 8px 0 0 0;">Section de l'examen</th>
+                    <th style="padding:15px; text-align: right; border-radius: 0 8px 0 0;">Pondération</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding:12px; border-bottom: 1px solid var(--border-color);">Question 1 : Versionnage et Git</td>
+                    <td style="padding:12px; text-align: right; border-bottom: 1px solid var(--border-color); font-weight: 600;">/ 5 pts</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px; border-bottom: 1px solid var(--border-color);">Question 2 : Architecture de la solution</td>
+                    <td style="padding:12px; text-align: right; border-bottom: 1px solid var(--border-color); font-weight: 600;">/ 5 pts</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px; border-bottom: 1px solid var(--border-color);">Question 3 : Intégration de code externe et exécution</td>
+                    <td style="padding:12px; text-align: right; border-bottom: 1px solid var(--border-color); font-weight: 600;">/ 10 pts</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px; border-bottom: 1px solid var(--border-color);">Question 4 : Classe Drone (Standards et Logique métier)</td>
+                    <td style="padding:12px; text-align: right; border-bottom: 1px solid var(--border-color); font-weight: 600;">/ 35 pts</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px; border-bottom: 1px solid var(--border-color);">Question 5 : Classe Conteneur (Encapsulation et Logistique)</td>
+                    <td style="padding:12px; text-align: right; border-bottom: 1px solid var(--border-color); font-weight: 600;">/ 15 pts</td>
+                </tr>
+                <tr class="total-row">
+                    <td style="padding:20px; color: var(--victo-green); font-size: 1.2rem;">TOTAL GÉNÉRAL</td>
+                    <td style="padding:20px; text-align: right; color: var(--victo-green); font-size: 1.2rem;">/ 70 pts</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 Cégep de Victoriaville • Département d'Informatique • H26-P2-EX1
+    </div>
+</div>
+
+</body>
+</html>
